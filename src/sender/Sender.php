@@ -1,20 +1,33 @@
 <?php
-class Sender extends BaseSender{
+namespace aiqiu506\sender;
 
-   public  static setStation(array $stations){
+class Sender extends BaseSender {
 
-   	foreach ($stations  as $k =>$v) {
-		   		
-   			parrent::setStation($v);
+    public function setName($name){
+        if(!static::$businessName){
+            static::$businessName=$name;
+        }
+        return $this;
+    }
 
-   	}
-   	static::$stationArr['']
+    public function setSendTo($to){
+        static::$sendTo[]=$to;
+        return $this;
+    }
+    public function setParams($params){
+        static::$params=$params;
+        return $this;
+    }
 
-   	return self;
+    public function setStation($station){
+        if(static::activateStation($station)){
+            return $this;
+        }else{
+            //不存在，要报错
+            return false;
+        }
 
-   }
 
-   public 
-
+    }
 
 }
